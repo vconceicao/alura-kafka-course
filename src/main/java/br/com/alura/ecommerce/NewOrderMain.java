@@ -8,6 +8,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Objects;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 
@@ -21,8 +22,11 @@ public class NewOrderMain {
         //create a kafka producer
         final var kafkaProducer = new KafkaProducer<String, String>(properties());
 
+        //creating a new id for the user, this is because kafka will use this info as key to parallelize the messages consumed
+        var userId = UUID.randomUUID().toString();
+
         //create a message
-        final String value = "5464545, 54645, 2021";
+        final String value =  userId + ",54645, 2021";
         String email = "Thank you for your order, your has been proccessed!";
 
         //create a producer record within a topic, or simply writing a message in a topic
