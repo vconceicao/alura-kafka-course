@@ -1,5 +1,6 @@
 package br.com.alura.ecommerce;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -22,12 +23,16 @@ public class NewOrderMain {
 
         //create a message
         final String value = "5464545, 54645, 2021";
+        String email = "Thank you for your order, your has been proccessed!";
 
         //create a producer record within a topic, or simply writing a message in a topic
         final ProducerRecord<String, String> record = new ProducerRecord<>("JAVA-TOPIC", value, value);
 
+        //create a producer record within a topic, or simply writing a message in a topic
+        final ProducerRecord<String, String> emailRecord = new ProducerRecord<>("ECOMMERCE-EMAIL", email, email);
+
         //send a message to the topic
-        kafkaProducer.send(record, (data, exception) -> {
+        final Callback callback = (data, exception) -> {
 
             if (Objects.nonNull(exception)) {
                 exception.printStackTrace();
@@ -37,7 +42,10 @@ public class NewOrderMain {
             //the message sent
             System.out.println("mensagem enviada com sucesso para o topico " + data.topic() + " offset " + data.offset() + " na particao " + data.partition() + " timestamp " + data.timestamp());
 
-        }).get();//get will return a result in the future
+        };
+
+        kafkaProducer.send(record, callback).get();//get will return a result in the future
+        kafkaProducer.send(emailRecord, callback).get();//get will return a result in the future
     }
 
     private static Properties properties() {
