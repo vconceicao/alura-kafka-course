@@ -19,7 +19,7 @@ public class KafkaService {
     private final ConsumerFunction parser;
     private final KafkaConsumer<String, String> consumer;
 
-    public KafkaService(String topic, ConsumerFunction parser) {
+    public KafkaService(String groupId, String topic, ConsumerFunction parser) {
         //TODO CRIAR UM NOVO PARAMETRO GROUPID
         this.parser = parser;
         this.consumer =  new KafkaConsumer<String, String>(properties());

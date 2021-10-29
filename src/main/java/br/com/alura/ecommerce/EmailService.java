@@ -1,14 +1,6 @@
 package br.com.alura.ecommerce;
 
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.StringDeserializer;
-
-import java.time.Duration;
-import java.util.Collections;
-import java.util.Properties;
 
 
 public class EmailService {
@@ -17,7 +9,7 @@ public class EmailService {
 
         final var emailService = new EmailService();
 
-        final KafkaService kafkaService = new KafkaService("ECOMMERCE-EMAIL", emailService::parse);
+        final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "ECOMMERCE-EMAIL", emailService::parse);
         kafkaService.run();
 
     }
