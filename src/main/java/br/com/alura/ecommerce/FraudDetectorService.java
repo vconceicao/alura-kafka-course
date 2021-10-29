@@ -9,12 +9,10 @@ public class FraudDetectorService {
 
     public static void main(String[] args) {
 
-
         final var fraudDetectorService = new FraudDetectorService();
 
         final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "JAVA-TOPIC", fraudDetectorService::parse);
         kafkaService.run();
-
 
     }
 
