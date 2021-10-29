@@ -16,12 +16,13 @@ public class EmailService {
     public static void main(String[] args) {
 
         final var emailService = new EmailService();
-        final KafkaService kafkaService = new KafkaService("ECOMMERCE-EMAIL", records -> emailService.parse(records));
+
+        final KafkaService kafkaService = new KafkaService("ECOMMERCE-EMAIL", emailService::parse);
         kafkaService.run();
 
     }
 
-    private static void parse(ConsumerRecord<String, String> r) {
+    private  void parse(ConsumerRecord<String, String> r) {
         System.out.println("Sending email....");
         System.out.println(r.key());
         System.out.println(r.value());
