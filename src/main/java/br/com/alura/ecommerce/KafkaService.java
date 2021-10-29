@@ -38,6 +38,8 @@ public class KafkaService {
         //TODO RECEBER O VALOR DA CHAVE POR PARAMETRO
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, EmailService.class.getSimpleName());
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
+
 
 
         return properties;
