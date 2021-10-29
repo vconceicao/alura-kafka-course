@@ -3,39 +3,39 @@ Alura Kafka Course
 
 #Kafka Commands
 
-##Levantar zookeeper
+##Set up zookeeper
 
 `.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 `
 
-##Levantar kafka
+##Set up kafka
 
 `.\bin\windows\kafka-server-start.bat .\config\server.properties
 `
-##Criar topico
+##Create a topic
 
 `bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TestTopic
 `
 
---Listar topicos
+##List topics
 
 `\kafka-topics.bat --list --bootstrap-server localhost:9092
 `
 
----Criar producer
+##Create producer
 
 `bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic  TestTopic
 `
-----criar consumer
+##Create conumser
 
 `bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic  TestTopic --from-beginning
 `
 
----mudar numero de particoes de um topico
+##Change partitions number of an existing topic
 `bin/windows/kafka-topics.bat --alter --zookeeper localhost:2181 --topic JAVA-TOPIC --partitions 3
 `
 
---descrever os grupos de consumo
+##Describe consumer groups
 `bin\windows\kafka-consumer-groups.bat --all-groups --bootstrap-server localhost:9092 --describe
 `
 ##**Util Samples**
