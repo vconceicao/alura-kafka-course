@@ -15,6 +15,7 @@ import java.util.UUID;
  * Encasulates the logic of the KafkaConsumer
  */
 
+//TODO IMPLEMENT CLOSEABLE
 public class KafkaService {
     private final ConsumerFunction parser;
     private final KafkaConsumer<String, String> consumer;

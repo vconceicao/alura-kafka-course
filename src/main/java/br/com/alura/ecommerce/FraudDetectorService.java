@@ -5,10 +5,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 /**
  * A simple Kafka Consumer that reads from a topic
  */
+
 public class FraudDetectorService {
 
     public static void main(String[] args) {
-
+        //TODO USE TRY WITH RESOURCES
         final var fraudDetectorService = new FraudDetectorService();
 
         final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "JAVA-TOPIC", fraudDetectorService::parse);

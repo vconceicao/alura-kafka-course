@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
+//TODO - IMPLEMENT CLOSEABLE
 public class KafkaDispatcher {
 
     private final KafkaProducer<String, String> kafkaProducer;
@@ -25,7 +26,7 @@ public class KafkaDispatcher {
 
         final var record = new ProducerRecord<String, String>(topic, key, value);
 
-        for (var i =0; i<10; i++) {
+
 
             //send a message to the topic
             final Callback callback = (data, exception) -> {
@@ -42,7 +43,7 @@ public class KafkaDispatcher {
 
             kafkaProducer.send(record, callback).get();//get will return a result in the future
 
-        }
+
     }
 
 
