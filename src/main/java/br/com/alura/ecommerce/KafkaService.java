@@ -20,13 +20,10 @@ public class KafkaService {
     private final KafkaConsumer<String, String> consumer;
 
     public KafkaService(String groupId, String topic, ConsumerFunction parser) {
-        //TODO CRIAR UM NOVO PARAMETRO GROUPID
         this.parser = parser;
         this.consumer =  new KafkaConsumer<String, String>(properties(groupId));
         //subscribing to a topic
         consumer.subscribe(Collections.singletonList(topic));
-
-        //Infinite loop to keep checking for new messeges
 
     }
 
