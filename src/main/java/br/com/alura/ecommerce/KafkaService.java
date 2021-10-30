@@ -5,6 +5,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
@@ -16,7 +18,7 @@ import java.util.UUID;
  */
 
 //TODO IMPLEMENT CLOSEABLE
-public class KafkaService {
+public class KafkaService implements Closeable {
     private final ConsumerFunction parser;
     private final KafkaConsumer<String, String> consumer;
 
@@ -61,5 +63,10 @@ public class KafkaService {
 
         }
 
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.consumer.close();
     }
 }
