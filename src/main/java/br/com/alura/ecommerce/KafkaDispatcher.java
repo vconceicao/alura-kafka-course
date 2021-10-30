@@ -6,12 +6,14 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-//TODO - IMPLEMENT CLOSEABLE
-public class KafkaDispatcher {
+
+public class KafkaDispatcher implements Closeable {
 
     private final KafkaProducer<String, String> kafkaProducer;
 
@@ -27,21 +29,20 @@ public class KafkaDispatcher {
         final var record = new ProducerRecord<String, String>(topic, key, value);
 
 
+        //send a message to the topic
+        final Callback callback = (data, exception) -> {
 
-            //send a message to the topic
-            final Callback callback = (data, exception) -> {
+            if (Objects.nonNull(exception)) {
+                exception.printStackTrace();
+                return;
+            }
 
-                if (Objects.nonNull(exception)) {
-                    exception.printStackTrace();
-                    return;
-                }
+            //the message sent
+            System.out.println("mensagem enviada com sucesso para o topico " + data.topic() + " offset " + data.offset() + " na particao " + data.partition() + " timestamp " + data.timestamp());
 
-                //the message sent
-                System.out.println("mensagem enviada com sucesso para o topico " + data.topic() + " offset " + data.offset() + " na particao " + data.partition() + " timestamp " + data.timestamp());
+        };
 
-            };
-
-            kafkaProducer.send(record, callback).get();//get will return a result in the future
+        kafkaProducer.send(record, callback).get();//get will return a result in the future
 
 
     }
@@ -55,5 +56,10 @@ public class KafkaDispatcher {
 
 
         return properties;
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.kafkaProducer.close();
     }
 }
