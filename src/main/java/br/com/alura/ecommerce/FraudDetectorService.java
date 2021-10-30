@@ -2,19 +2,22 @@ package br.com.alura.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.io.IOException;
+
 /**
  * A simple Kafka Consumer that reads from a topic
  */
 
 public class FraudDetectorService {
 
-    public static void main(String[] args) {
-        //TODO USE TRY WITH RESOURCES
+    public static void main(String[] args) throws IOException {
+
         final var fraudDetectorService = new FraudDetectorService();
 
-        final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "JAVA-TOPIC", fraudDetectorService::parse);
-        kafkaService.run();
+        try (final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "JAVA-TOPIC", fraudDetectorService::parse)) {
 
+            kafkaService.run();
+        }
     }
 
     private void parse(ConsumerRecord<String, String> r) {
