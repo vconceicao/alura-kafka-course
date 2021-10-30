@@ -1,5 +1,6 @@
 package br.com.alura.ecommerce;
 
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -9,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class NewOrderMain {
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
 
 
         var userId = UUID.randomUUID().toString();
@@ -18,13 +19,14 @@ public class NewOrderMain {
         final String value = userId + ",54645, 2021";
 
 
-        //TODO - USE TRY WITH RESOURCES
-        final var kafkaDispatcher = new KafkaDispatcher();
-        for (var i = 0; i < 10; i++) {
-            kafkaDispatcher.send("JAVA-TOPIC", value, value);
+        try (var kafkaDispatcher = new KafkaDispatcher()) {
 
-            var email = "Thank you for your order, your has been proccessed!";
-            kafkaDispatcher.send("ECOMMERCE-EMAIL", email, email);
+            for (var i = 0; i < 10; i++) {
+                kafkaDispatcher.send("JAVA-TOPIC", value, value);
+
+                var email = "Thank you for your order, your has been proccessed!";
+                kafkaDispatcher.send("ECOMMERCE-EMAIL", email, email);
+            }
         }
 
 
