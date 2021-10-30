@@ -1,6 +1,21 @@
 # Alura kafka course
 Alura Kafka Course
 
+
+#Kafka Configuration Windows
+
+Take a look at your server.properties file and locate the logs directory under the following entry and change it.
+
+`Example:
+log.dirs=/tmp/kafka-logs/`
+
+Take a look at the zookeeper.properties file and locate the data directory under the following entry and change it.
+
+`Example:
+dataDir=/tmp/zookeeper`
+
+Don't use the same directory for kafka and zookeeper logs.
+
 #Kafka Commands
 
 ##Set up zookeeper
@@ -50,7 +65,9 @@ Simple kafka producer that writes a messages in more than one topic - aula-02/sr
 
 #QA
 
-#Q - How to solve partition rebalancing problems in consumers?
+###Q - How to solve partition rebalancing problems in consumers?
 Set the property MAX_POLL_RECORDS_CONFIG to 1, to commit often
 `properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
 `
+###Q - How to solve FATAL SHUTDOWN error. Logs directory failed?
+[https://stackoverflow.com/a/53179107](https://stackoverflow.com/a/53179107)
