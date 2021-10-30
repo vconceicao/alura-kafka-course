@@ -2,15 +2,19 @@ package br.com.alura.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.io.IOException;
+
 
 public class EmailService {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         final var emailService = new EmailService();
 
-        final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "ECOMMERCE-EMAIL", emailService::parse);
-        kafkaService.run();
+        try (final KafkaService kafkaService = new KafkaService(FraudDetectorService.class.getSimpleName(), "ECOMMERCE-EMAIL", emailService::parse)){
+
+            kafkaService.run();
+        }
 
     }
 
