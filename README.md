@@ -56,14 +56,18 @@ Don't use the same directory for kafka and zookeeper logs.
 `bin\windows\kafka-consumer-groups.bat --all-groups --bootstrap-server localhost:9092 --describe
 `
 ## **Util Samples**
-Simple kafka consumer that reads from a topic - aula-01/src/main/java/br/com/alura/ecommerce/FraudDetectorService.java
+**Simple kafka consumer that reads from a topic** - aula-01/src/main/java/br/com/alura/ecommerce/FraudDetectorService.java
 </br>
-Simple kafka producer that writes a message in a topic - aula-01/src/main/java/br/com/alura/ecommerce/NewOrderMain.java
+*Simple kafka producer that writes a message in a topic* - aula-01/src/main/java/br/com/alura/ecommerce/NewOrderMain.java
 </br>
-Simple kafka producer that writes a messages in more than one topic - aula-02/src/main/java/br/com/alura/ecommerce/NewOrderMain.java
+*Simple kafka producer that writes a messages in more than one topic* - aula-02/src/main/java/br/com/alura/ecommerce/NewOrderMain.java
 </br>
-*A consumer that reads messages from more than one top*ic - aula-02/src/main/java/br/com/alura/ecommerce/LogService.java
-
+*A consumer that reads messages from more than one topic* - aula-02/src/main/java/br/com/alura/ecommerce/LogService.java
+</br>
+*Logic abstraction of Kafka Consumer* -  aula-03 /src/main/java/br/com/alura/ecommerce/KafkaService.java
+</br>
+*Logic abstraction of Kafka Producer* -  aula-03 /src/main/java/br/com/alura/ecommerce/KafkaDispatcher.java
+</br>
 
 # QA
 
